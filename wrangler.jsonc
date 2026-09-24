@@ -1,0 +1,9 @@
+{
+  // IMPORTANT: Change "name" to match YOUR Worker name in Cloudflare dashboard.
+  // If it doesn't match, Cloudflare creates a NEW worker instead of updating your live site.
+  "name": "yesmakr",
+  "compatibility_date": "2024-09-23",
+  "assets": {
+    "directory": "./out"
+  }
+}

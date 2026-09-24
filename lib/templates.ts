@@ -1,0 +1,139 @@
+export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship';
+
+export interface PaletteOption {
+  id: string;
+  name: string;
+  bg: string;
+  bgGradientFrom: string;
+  bgGradientTo: string;
+  primary: string;
+  primaryForeground: string;
+  secondary: string;
+  secondaryForeground: string;
+  text: string;
+  muted: string;
+  accent: string;
+}
+
+export interface TemplateConfig {
+  id: TemplateId;
+  emoji: string;
+  label: string;
+  defaultQuestion: string;
+  celebrationEmojis: string[];
+  celebrationMessage: string;
+  palettes: PaletteOption[];
+  defaultPalette: string;
+}
+
+export const FONT_OPTIONS = [
+  { id: 'playfair', name: 'Playfair Display', family: "'Playfair Display', serif", url: 'Playfair+Display:wght@400;600;700;800' },
+  { id: 'pacifico', name: 'Pacifico', family: "'Pacifico', cursive", url: 'Pacifico' },
+  { id: 'poppins', name: 'Poppins', family: "'Poppins', sans-serif", url: 'Poppins:wght@400;500;600;700' },
+  { id: 'dancing', name: 'Dancing Script', family: "'Dancing Script', cursive", url: 'Dancing+Script:wght@400;500;600;700' },
+  { id: 'nunito', name: 'Nunito', family: "'Nunito', sans-serif", url: 'Nunito:wght@400;500;600;700;800' },
+] as const;
+
+export const TEMPLATES: Record<TemplateId, TemplateConfig> = {
+  love: {
+    id: 'love',
+    emoji: '💘',
+    label: 'Love / Date',
+    defaultQuestion: 'Do you love me?',
+    celebrationEmojis: ['💖', '💕', '❤️', '💗', '💘', '😍', '🥰', '💞', '💝', '🌹'],
+    celebrationMessage: 'Yay! 💖 They said YES!',
+    defaultPalette: 'rose',
+    palettes: [
+      { id: 'rose', name: 'Rose', bg: '#FFF0F5', bgGradientFrom: '#FFE4EC', bgGradientTo: '#FFF0F5', primary: '#E11D48', primaryForeground: '#FFFFFF', secondary: '#FFC0CB', secondaryForeground: '#9F1239', text: '#4A0020', muted: '#F9A8C9', accent: '#FB7185' },
+      { id: 'deep-red', name: 'Deep Red', bg: '#1A0000', bgGradientFrom: '#2D0A0A', bgGradientTo: '#1A0000', primary: '#EF4444', primaryForeground: '#FFFFFF', secondary: '#7F1D1D', secondaryForeground: '#FCA5A5', text: '#FEE2E2', muted: '#991B1B', accent: '#F87171' },
+      { id: 'lavender-love', name: 'Lavender', bg: '#F5F0FF', bgGradientFrom: '#EDE4FF', bgGradientTo: '#F5F0FF', primary: '#A855F7', primaryForeground: '#FFFFFF', secondary: '#E9D5FF', secondaryForeground: '#6B21A8', text: '#3B0764', muted: '#C4B5FD', accent: '#C084FC' },
+      { id: 'blush', name: 'Blush', bg: '#FFF5F5', bgGradientFrom: '#FFE8E8', bgGradientTo: '#FFF5F5', primary: '#F43F5E', primaryForeground: '#FFFFFF', secondary: '#FFD1D1', secondaryForeground: '#BE123C', text: '#500724', muted: '#FDA4AF', accent: '#FB7185' },
+    ],
+  },
+  gym: {
+    id: 'gym',
+    emoji: '🏋️',
+    label: 'Gym / Trainer',
+    defaultQuestion: 'Will you come to the gym with me?',
+    celebrationEmojis: ['💪', '🏋️', '🔥', '⚡', '💥', '🦾', '🏆', '👊', '🎯', '🔱'],
+    celebrationMessage: "LET'S GO! 💪🔥",
+    defaultPalette: 'inferno',
+    palettes: [
+      { id: 'inferno', name: 'Inferno', bg: '#0F0F0F', bgGradientFrom: '#1A1005', bgGradientTo: '#0F0F0F', primary: '#F97316', primaryForeground: '#FFFFFF', secondary: '#431407', secondaryForeground: '#FDBA74', text: '#FFF7ED', muted: '#9A3412', accent: '#FB923C' },
+      { id: 'neon-green', name: 'Neon', bg: '#0A0F0A', bgGradientFrom: '#0D1A0D', bgGradientTo: '#0A0F0A', primary: '#22C55E', primaryForeground: '#FFFFFF', secondary: '#14532D', secondaryForeground: '#86EFAC', text: '#F0FDF4', muted: '#166534', accent: '#4ADE80' },
+      { id: 'steel', name: 'Steel', bg: '#111827', bgGradientFrom: '#1F2937', bgGradientTo: '#111827', primary: '#60A5FA', primaryForeground: '#FFFFFF', secondary: '#1E3A5F', secondaryForeground: '#93C5FD', text: '#F0F9FF', muted: '#1E40AF', accent: '#3B82F6' },
+      { id: 'crimson-dark', name: 'Crimson', bg: '#0F0505', bgGradientFrom: '#1A0A0A', bgGradientTo: '#0F0505', primary: '#DC2626', primaryForeground: '#FFFFFF', secondary: '#450A0A', secondaryForeground: '#FCA5A5', text: '#FEF2F2', muted: '#7F1D1D', accent: '#EF4444' },
+    ],
+  },
+  food: {
+    id: 'food',
+    emoji: '🍕',
+    label: 'Food Date',
+    defaultQuestion: 'Will you grab food with me?',
+    celebrationEmojis: ['🍕', '🍔', '🌮', '🍩', '🍰', '🍟', '🧁', '🍣', '🥑', '🍝'],
+    celebrationMessage: 'FOOOOOD TIME! 🍕🎉',
+    defaultPalette: 'warm',
+    palettes: [
+      { id: 'warm', name: 'Warm', bg: '#FFFBF0', bgGradientFrom: '#FFF3D6', bgGradientTo: '#FFFBF0', primary: '#EA580C', primaryForeground: '#FFFFFF', secondary: '#FED7AA', secondaryForeground: '#9A3412', text: '#431407', muted: '#FDBA74', accent: '#F97316' },
+      { id: 'mint-fresh', name: 'Mint', bg: '#F0FFF4', bgGradientFrom: '#E6FFED', bgGradientTo: '#F0FFF4', primary: '#059669', primaryForeground: '#FFFFFF', secondary: '#A7F3D0', secondaryForeground: '#065F46', text: '#064E3B', muted: '#6EE7B7', accent: '#10B981' },
+      { id: 'cherry', name: 'Cherry', bg: '#FFF5F5', bgGradientFrom: '#FFE8E8', bgGradientTo: '#FFF5F5', primary: '#DC2626', primaryForeground: '#FFFFFF', secondary: '#FECACA', secondaryForeground: '#991B1B', text: '#450A0A', muted: '#FCA5A5', accent: '#EF4444' },
+      { id: 'golden', name: 'Golden', bg: '#FFFDF0', bgGradientFrom: '#FEF9C3', bgGradientTo: '#FFFDF0', primary: '#CA8A04', primaryForeground: '#FFFFFF', secondary: '#FEF08A', secondaryForeground: '#854D0E', text: '#422006', muted: '#FDE047', accent: '#EAB308' },
+    ],
+  },
+  movie: {
+    id: 'movie',
+    emoji: '🎬',
+    label: 'Movie Night',
+    defaultQuestion: 'Will you watch a movie with me?',
+    celebrationEmojis: ['🍿', '🎬', '⭐', '✨', '🌟', '🎥', '🎞️', '🎭', '🎪', '💫'],
+    celebrationMessage: 'Movie Night! 🍿✨',
+    defaultPalette: 'cinema',
+    palettes: [
+      { id: 'cinema', name: 'Cinema', bg: '#0F0720', bgGradientFrom: '#1A0A3E', bgGradientTo: '#0F0720', primary: '#A855F7', primaryForeground: '#FFFFFF', secondary: '#3B0764', secondaryForeground: '#D8B4FE', text: '#FAF5FF', muted: '#7C3AED', accent: '#C084FC' },
+      { id: 'midnight', name: 'Midnight', bg: '#020617', bgGradientFrom: '#0F172A', bgGradientTo: '#020617', primary: '#3B82F6', primaryForeground: '#FFFFFF', secondary: '#1E3A5F', secondaryForeground: '#93C5FD', text: '#F0F9FF', muted: '#1D4ED8', accent: '#60A5FA' },
+      { id: 'retro', name: 'Retro', bg: '#1A1A2E', bgGradientFrom: '#16213E', bgGradientTo: '#1A1A2E', primary: '#E94560', primaryForeground: '#FFFFFF', secondary: '#533483', secondaryForeground: '#F8B4C8', text: '#EAEAEA', muted: '#0F3460', accent: '#F06292' },
+      { id: 'spotlight', name: 'Spotlight', bg: '#1C1C1C', bgGradientFrom: '#2D2D2D', bgGradientTo: '#1C1C1C', primary: '#FBBF24', primaryForeground: '#1C1C1C', secondary: '#422006', secondaryForeground: '#FDE68A', text: '#FEF3C7', muted: '#92400E', accent: '#F59E0B' },
+    ],
+  },
+  friendship: {
+    id: 'friendship',
+    emoji: '🐾',
+    label: 'Friendship',
+    defaultQuestion: 'Will you be my friend?',
+    celebrationEmojis: ['🌈', '🎉', '🎊', '✨', '💫', '🦋', '🌸', '🎈', '🎀', '⭐'],
+    celebrationMessage: 'New bestie! 🌈🎉',
+    defaultPalette: 'rainbow',
+    palettes: [
+      { id: 'rainbow', name: 'Rainbow', bg: '#FEFCE8', bgGradientFrom: '#FEF3C7', bgGradientTo: '#FEFCE8', primary: '#8B5CF6', primaryForeground: '#FFFFFF', secondary: '#FDE68A', secondaryForeground: '#6D28D9', text: '#1E1B4B', muted: '#C4B5FD', accent: '#A78BFA' },
+      { id: 'bubblegum', name: 'Bubblegum', bg: '#FFF0F6', bgGradientFrom: '#FFE0EB', bgGradientTo: '#FFF0F6', primary: '#EC4899', primaryForeground: '#FFFFFF', secondary: '#FBCFE8', secondaryForeground: '#BE185D', text: '#500724', muted: '#F9A8D4', accent: '#F472B6' },
+      { id: 'ocean', name: 'Ocean', bg: '#F0F9FF', bgGradientFrom: '#E0F2FE', bgGradientTo: '#F0F9FF', primary: '#0EA5E9', primaryForeground: '#FFFFFF', secondary: '#BAE6FD', secondaryForeground: '#0369A1', text: '#0C4A6E', muted: '#7DD3FC', accent: '#38BDF8' },
+      { id: 'forest', name: 'Forest', bg: '#F0FDF4', bgGradientFrom: '#DCFCE7', bgGradientTo: '#F0FDF4', primary: '#16A34A', primaryForeground: '#FFFFFF', secondary: '#BBF7D0', secondaryForeground: '#15803D', text: '#14532D', muted: '#86EFAC', accent: '#4ADE80' },
+    ],
+  },
+};
+
+export function getTemplate(id: string): TemplateConfig {
+  return TEMPLATES[id as TemplateId] ?? TEMPLATES.love;
+}
+
+export function getPalette(template: TemplateConfig, paletteId: string): PaletteOption {
+  return template.palettes?.find?.((p: PaletteOption) => p?.id === paletteId) ?? template.palettes?.[0] ?? template.palettes[0];
+}
+
+export function getFont(fontId: string) {
+  return FONT_OPTIONS?.find?.((f) => f?.id === fontId) ?? FONT_OPTIONS[2]; // default Poppins
+}
+
+export function buildShareUrl(params: {
+  template: string;
+  question: string;
+  palette: string;
+  font: string;
+}): string {
+  const sp = new URLSearchParams();
+  sp.set('template', params?.template ?? 'love');
+  sp.set('question', params?.question ?? '');
+  sp.set('palette', params?.palette ?? '');
+  sp.set('font', params?.font ?? 'poppins');
+  return `/ask?${sp.toString()}`;
+}
