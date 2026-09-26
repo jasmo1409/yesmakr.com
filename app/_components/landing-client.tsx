@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2 } from 'lucide-react';
 import Link from 'next/link';
 import type { TemplateConfig } from '@/lib/templates';
 
@@ -12,6 +12,7 @@ const TEMPLATE_ICONS: Record<string, React.ReactNode> = {
   food: <Pizza className="w-8 h-8" />,
   movie: <Film className="w-8 h-8" />,
   friendship: <PawPrint className="w-8 h-8" />,
+  custom: <Wand2 className="w-8 h-8" />,
 };
 
 const CARD_GRADIENTS: Record<string, string> = {
@@ -20,6 +21,7 @@ const CARD_GRADIENTS: Record<string, string> = {
   food: 'from-amber-400 to-orange-500',
   movie: 'from-purple-500 to-indigo-600',
   friendship: 'from-violet-400 to-fuchsia-500',
+  custom: 'from-slate-500 to-indigo-600',
 };
 
 const CARD_BG_LIGHT: Record<string, string> = {
@@ -28,25 +30,26 @@ const CARD_BG_LIGHT: Record<string, string> = {
   food: 'bg-amber-50',
   movie: 'bg-purple-50',
   friendship: 'bg-fuchsia-50',
+  custom: 'bg-slate-50',
 };
 
 export default function LandingClient({ templates }: { templates: TemplateConfig[] }) {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-rose-100/50">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-slate-200/60">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl">💘</span>
-            <span className="font-display font-bold text-xl tracking-tight bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent">
-              YesMakr
+            <span className="text-2xl">💬</span>
+            <span className="font-display font-bold text-xl tracking-tight bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">
+              AskMe
             </span>
           </Link>
           <Link
             href="/create"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-500 to-purple-600 text-white text-sm font-semibold shadow-lg shadow-rose-200/50 hover:shadow-xl hover:shadow-rose-300/50 transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white text-sm font-semibold shadow-lg shadow-indigo-200/50 hover:shadow-xl hover:shadow-indigo-300/50 transition-all duration-300 hover:scale-105"
           >
             Create Yours
             <Sparkles className="w-4 h-4" />
@@ -63,7 +66,7 @@ export default function LandingClient({ templates }: { templates: TemplateConfig
         >
           <div className="text-6xl mb-6 animate-bounce-soft">🤔</div>
           <h1 className="text-4xl md:text-6xl font-display font-extrabold tracking-tight text-gray-900 mb-4">
-            Ask Anyone, <span className="bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent">Anything</span>
+            Ask Anyone, <span className="bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">Anything</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Create a fun, interactive yes/no question page and share it.
@@ -80,7 +83,7 @@ export default function LandingClient({ templates }: { templates: TemplateConfig
         >
           <Link
             href="/create"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-rose-500 to-purple-600 text-white text-lg font-bold shadow-xl shadow-rose-200/60 hover:shadow-2xl hover:shadow-rose-300/60 transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-600 text-white text-lg font-bold shadow-xl shadow-indigo-200/60 hover:shadow-2xl hover:shadow-indigo-300/60 transition-all duration-300 hover:scale-105"
           >
             Create Your Page
             <ArrowRight className="w-5 h-5" />
@@ -100,8 +103,8 @@ export default function LandingClient({ templates }: { templates: TemplateConfig
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { step: '1', emoji: '🎨', title: 'Pick a Template', desc: 'Choose from love, gym, food, movie, or friendship themes' },
-            { step: '2', emoji: '✏️', title: 'Customize It', desc: 'Edit the question, pick colors and fonts to match your style' },
+            { step: '1', emoji: '🎨', title: 'Pick a Template', desc: 'Choose a ready-made theme — or Build Your Own from scratch' },
+            { step: '2', emoji: '✏️', title: 'Customize It', desc: 'Edit the question and pick a color palette to match your style' },
             { step: '3', emoji: '🔗', title: 'Share the Link', desc: 'Copy the link and send it — then watch them try to say No!' },
           ].map((item: any, i: number) => (
             <motion.div
@@ -112,7 +115,7 @@ export default function LandingClient({ templates }: { templates: TemplateConfig
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="relative bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-br from-rose-500 to-purple-600 text-white text-sm font-bold flex items-center justify-center shadow-lg">
+              <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white text-sm font-bold flex items-center justify-center shadow-lg">
                 {item.step}
               </div>
               <div className="text-4xl mb-3">{item.emoji}</div>
@@ -169,7 +172,7 @@ export default function LandingClient({ templates }: { templates: TemplateConfig
                     <span className={`bg-gradient-to-r ${CARD_GRADIENTS[t?.id] ?? 'from-gray-400 to-gray-500'} bg-clip-text text-transparent`}>
                       Use this template
                     </span>
-                    <ArrowRight className={`w-4 h-4 text-rose-500 group-hover:translate-x-1 transition-transform duration-300`} />
+                    <ArrowRight className={`w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform duration-300`} />
                   </div>
 
                   {/* Floating emojis on hover */}
@@ -200,10 +203,10 @@ export default function LandingClient({ templates }: { templates: TemplateConfig
       <footer className="max-w-5xl mx-auto px-4 py-10 mt-8 border-t border-gray-100">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-xl">💘</span>
-            <span className="font-display font-bold text-gray-700">YesMakr</span>
+            <span className="text-xl">💬</span>
+            <span className="font-display font-bold text-gray-700">AskMe</span>
           </div>
-          <p className="text-sm text-gray-400">Made with 💖 for fun questions</p>
+          <p className="text-sm text-gray-400">Made for fun questions ✨</p>
         </div>
       </footer>
     </div>

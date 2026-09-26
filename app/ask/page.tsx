@@ -10,6 +10,7 @@ function AskContent() {
   const question = searchParams?.get('question') ?? '';
   const palette = searchParams?.get('palette') ?? '';
   const font = searchParams?.get('font') ?? 'poppins';
+  const emoji = searchParams?.get('emoji') ?? '';
 
   return (
     <AskClient
@@ -17,6 +18,7 @@ function AskContent() {
       questionText={question}
       paletteId={palette}
       fontId={font}
+      emojiOverride={emoji}
     />
   );
 }

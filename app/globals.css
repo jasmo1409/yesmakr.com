@@ -30,10 +30,10 @@
 /* Pulse glow animation */
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 20px var(--glow-color, rgba(225, 29, 72, 0.4));
+    box-shadow: 0 0 20px var(--glow-color, rgba(124, 58, 237, 0.4));
   }
   50% {
-    box-shadow: 0 0 40px var(--glow-color, rgba(225, 29, 72, 0.7));
+    box-shadow: 0 0 40px var(--glow-color, rgba(124, 58, 237, 0.7));
   }
 }
 

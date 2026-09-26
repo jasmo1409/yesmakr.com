@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'YesMakr — Fun Yes/No Questions',
   description: 'Create fun, interactive yes/no questions and share them with anyone. The No button has a mind of its own! 😄',
   icons: {
-    icon: '/favicon.svg',
+    icon: '/favicon.svg?v=2',
   },
   openGraph: {
     title: 'YesMakr — Fun Yes/No Questions',

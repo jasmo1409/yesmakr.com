@@ -10,16 +10,22 @@ interface AskClientProps {
   questionText: string;
   paletteId: string;
   fontId: string;
+  emojiOverride?: string;
 }
 
 const MAX_DODGES = 10;
 const SHRINK_START = 5;
 
-export default function AskClient({ templateId, questionText, paletteId, fontId }: AskClientProps) {
+export default function AskClient({ templateId, questionText, paletteId, fontId, emojiOverride }: AskClientProps) {
   const template = useMemo(() => getTemplate(templateId), [templateId]);
   const palette = useMemo(() => getPalette(template, paletteId), [template, paletteId]);
   const font = useMemo(() => getFont(fontId), [fontId]);
   const question = questionText || template?.defaultQuestion || 'Will you?';
+  const displayEmoji = emojiOverride || template?.emoji || '✨';
+  const celebrationEmojis = useMemo(
+    () => (emojiOverride ? [emojiOverride, ...(template?.celebrationEmojis ?? [])] : (template?.celebrationEmojis ?? ['🎉'])),
+    [emojiOverride, template]
+  );
 
   const [dodgeCount, setDodgeCount] = useState(0);
   const [noPos, setNoPos] = useState<{ x: number; y: number } | null>(null);
@@ -104,7 +110,7 @@ export default function AskClient({ templateId, questionText, paletteId, fontId 
   const triggerCelebration = useCallback(() => {
     if (celebrated) return;
     setCelebrated(true);
-    const emojis = template?.celebrationEmojis ?? ['🎉'];
+    const emojis = celebrationEmojis ?? ['🎉'];
     const particles: Array<{ id: number; emoji: string; left: number; delay: number; duration: number; size: number }> = [];
     for (let i = 0; i < 50; i++) {
       particles.push({
@@ -117,7 +123,7 @@ export default function AskClient({ templateId, questionText, paletteId, fontId 
       });
     }
     setEmojiRain(particles);
-  }, [celebrated, template]);
+  }, [celebrated, celebrationEmojis]);
 
   const handleYes = useCallback(() => {
     triggerCelebration();
@@ -149,7 +155,7 @@ export default function AskClient({ templateId, questionText, paletteId, fontId 
       {/* Ambient floating emojis */}
       {!celebrated && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {(template?.celebrationEmojis?.slice?.(0, 6) ?? []).map((emoji: string, i: number) => (
+          {(celebrationEmojis?.slice?.(0, 6) ?? []).map((emoji: string, i: number) => (
             <motion.span
               key={`ambient-${i}`}
               className="absolute text-3xl opacity-10"
@@ -180,7 +186,7 @@ export default function AskClient({ templateId, questionText, paletteId, fontId 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             >
-              {template?.emoji}
+              {displayEmoji}
             </motion.div>
 
             {/* Question */}
@@ -209,7 +215,7 @@ export default function AskClient({ templateId, questionText, paletteId, fontId 
                   ['--glow-color' as string]: `${palette?.primary ?? '#e11d48'}66`,
                 }}
               >
-                Yes! {template?.emoji}
+                Yes! {displayEmoji}
               </motion.button>
 
               {/* No button */}
@@ -274,7 +280,7 @@ export default function AskClient({ templateId, questionText, paletteId, fontId 
             className="relative z-10 text-center max-w-md w-full"
           >
             <div className="celebration-burst text-8xl md:text-9xl mb-6">
-              {template?.emoji}
+              {displayEmoji}
             </div>
             <h1
               className="text-4xl md:text-5xl font-extrabold mb-4"
@@ -311,14 +317,14 @@ export default function AskClient({ templateId, questionText, paletteId, fontId 
         </span>
       ))}
 
-      {/* Made with YesMakr watermark */}
+      {/* Made with AskMe watermark */}
       <div className="absolute bottom-4 left-0 right-0 text-center">
         <a
           href="/"
           className="text-xs font-medium transition-opacity hover:opacity-100"
           style={{ color: palette?.muted ?? '#999', opacity: 0.5 }}
         >
-          Made with 💘 YesMakr
+          Made with 💘 AskMe
         </a>
       </div>
     </div>

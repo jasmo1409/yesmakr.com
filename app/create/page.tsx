@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useCallback, useMemo, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Copy, Check, Eye, Palette, Type, Sparkles, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Copy, Check, Eye, Palette, Type, Sparkles, ExternalLink, Smile } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { TEMPLATES, FONT_OPTIONS, getTemplate, getPalette, getFont, buildShareUrl } from '@/lib/templates';
+import { TEMPLATES, EMOJI_OPTIONS, getTemplate, getPalette, getFont, buildShareUrl } from '@/lib/templates';
 import type { TemplateId, TemplateConfig, PaletteOption } from '@/lib/templates';
 
 export default function CreatePageWrapper() {
@@ -22,18 +22,20 @@ export default function CreatePageWrapper() {
 
 function CreatePage() {
   const searchParams = useSearchParams();
-  const initialTemplate = (searchParams?.get?.('template') as TemplateId) ?? 'love';
+  const initialTemplate = (searchParams?.get?.('template') as TemplateId) ?? 'custom';
 
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateId>(initialTemplate);
   const [questionText, setQuestionText] = useState('');
   const [selectedPalette, setSelectedPalette] = useState('');
-  const [selectedFont, setSelectedFont] = useState('poppins');
+  const [selectedEmoji, setSelectedEmoji] = useState('');
   const [copied, setCopied] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
   const template = useMemo(() => getTemplate(selectedTemplate), [selectedTemplate]);
   const palette = useMemo(() => getPalette(template, selectedPalette), [template, selectedPalette]);
-  const font = useMemo(() => getFont(selectedFont), [selectedFont]);
+  const font = useMemo(() => getFont(palette?.font ?? 'poppins'), [palette]);
+  const isCustom = selectedTemplate === 'custom';
+  const displayEmoji = isCustom ? (selectedEmoji || template?.emoji || '✨') : (template?.emoji ?? '✨');
 
   // Load the Google font
   useEffect(() => {
@@ -48,10 +50,11 @@ function CreatePage() {
     existing.href = `https://fonts.googleapis.com/css2?family=${font?.url ?? 'Poppins:wght@400;500;600;700'}&display=swap`;
   }, [font]);
 
-  // Reset question & palette when template changes
+  // Reset question, palette & emoji when template changes
   useEffect(() => {
     setQuestionText(template?.defaultQuestion ?? '');
     setSelectedPalette(template?.defaultPalette ?? '');
+    setSelectedEmoji(template?.emoji ?? '');
   }, [template]);
 
   const shareUrl = useMemo(() => {
@@ -59,9 +62,10 @@ function CreatePage() {
       template: selectedTemplate,
       question: questionText,
       palette: selectedPalette,
-      font: selectedFont,
+      font: palette?.font ?? 'poppins',
+      emoji: isCustom ? displayEmoji : undefined,
     });
-  }, [selectedTemplate, questionText, selectedPalette, selectedFont]);
+  }, [selectedTemplate, questionText, selectedPalette, palette, isCustom, displayEmoji]);
 
   const fullUrl = useMemo(() => {
     if (typeof window === 'undefined') return '';
@@ -189,30 +193,31 @@ function CreatePage() {
               </div>
             </div>
 
-            {/* Font picker */}
-            <div className="bg-white rounded-2xl p-6 shadow-md">
-              <h3 className="font-bold text-gray-900 flex items-center gap-2 mb-4">
-                <Type className="w-5 h-5 text-purple-500" />
-                Font Style
-              </h3>
-              <div className="grid grid-cols-1 gap-2">
-                {(FONT_OPTIONS ?? []).map((f: any) => (
-                  <button
-                    key={f?.id}
-                    onClick={() => setSelectedFont(f?.id)}
-                    className={`px-4 py-3 rounded-xl border-2 text-left transition-all duration-300 ${
-                      selectedFont === f?.id
-                        ? 'border-purple-500 bg-purple-50 shadow-md'
-                        : 'border-gray-100 hover:border-gray-300'
-                    }`}
-                  >
-                    <span className="text-lg text-gray-800" style={{ fontFamily: f?.family }}>
-                      {f?.name}
-                    </span>
-                  </button>
-                ))}
+            {/* Emoji picker — only for the Build Your Own template */}
+            {isCustom && (
+              <div className="bg-white rounded-2xl p-6 shadow-md">
+                <h3 className="font-bold text-gray-900 flex items-center gap-2 mb-4">
+                  <Smile className="w-5 h-5 text-purple-500" />
+                  Choose Emoji
+                </h3>
+                <div className="grid grid-cols-8 gap-2">
+                  {(EMOJI_OPTIONS ?? []).map((em: string) => (
+                    <button
+                      key={em}
+                      onClick={() => setSelectedEmoji(em)}
+                      className={`aspect-square rounded-xl border-2 text-2xl flex items-center justify-center transition-all duration-200 ${
+                        displayEmoji === em
+                          ? 'border-purple-500 bg-purple-50 shadow-md scale-105'
+                          : 'border-gray-100 hover:border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      {em}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-400 mt-3">This emoji shows on your page and in the celebration.</p>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Preview & Share */}
@@ -238,7 +243,7 @@ function CreatePage() {
                   transition={{ duration: 0.4 }}
                   className="space-y-6"
                 >
-                  <div className="text-5xl animate-bounce-soft">{template?.emoji}</div>
+                  <div className="text-5xl animate-bounce-soft">{displayEmoji}</div>
                   <h2 className="text-2xl font-bold leading-snug" style={{ color: palette?.text ?? '#333' }}>
                     {questionText || 'Your question here...'}
                   </h2>
@@ -250,7 +255,7 @@ function CreatePage() {
                         color: palette?.primaryForeground ?? '#fff',
                       }}
                     >
-                      Yes! {template?.emoji}
+                      Yes! {displayEmoji}
                     </div>
                     <div
                       className="px-8 py-3 rounded-xl font-bold text-lg shadow-md opacity-80"
