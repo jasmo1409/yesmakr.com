@@ -1,6 +1,7 @@
 import { DM_Sans, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import type { Metadata } from 'next'
+import { GoogleAnalytics } from '@/components/google-analytics'
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' })
 const jakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-display' })
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSans.variable} ${jakartaSans.variable} font-sans`}>
+        <GoogleAnalytics />
         {children}
       </body>
     </html>
