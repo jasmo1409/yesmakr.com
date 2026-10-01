@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2 } from 'lucide-react';
+import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2, Ghost } from 'lucide-react';
 import Link from 'next/link';
 import type { TemplateConfig } from '@/lib/templates';
 
@@ -12,6 +12,7 @@ const TEMPLATE_ICONS: Record<string, React.ReactNode> = {
   food: <Pizza className="w-8 h-8" />,
   movie: <Film className="w-8 h-8" />,
   friendship: <PawPrint className="w-8 h-8" />,
+  halloween: <Ghost className="w-8 h-8" />,
   custom: <Wand2 className="w-8 h-8" />,
 };
 
@@ -21,6 +22,7 @@ const CARD_GRADIENTS: Record<string, string> = {
   food: 'from-amber-400 to-orange-500',
   movie: 'from-purple-500 to-indigo-600',
   friendship: 'from-violet-400 to-fuchsia-500',
+  halloween: 'from-orange-500 to-purple-700',
   custom: 'from-slate-500 to-indigo-600',
 };
 
@@ -30,6 +32,7 @@ const CARD_BG_LIGHT: Record<string, string> = {
   food: 'bg-amber-50',
   movie: 'bg-purple-50',
   friendship: 'bg-fuchsia-50',
+  halloween: 'bg-orange-50',
   custom: 'bg-slate-50',
 };
 

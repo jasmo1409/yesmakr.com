@@ -2,7 +2,7 @@ import { TEMPLATES } from '@/lib/templates';
 import type { TemplateId } from '@/lib/templates';
 import LandingClient from './_components/landing-client';
 
-const TEMPLATE_ORDER = ['gym', 'movie', 'food', 'friendship', 'love', 'custom'];
+const TEMPLATE_ORDER = ['halloween', 'gym', 'movie', 'food', 'friendship', 'love', 'custom'];
 
 export default function HomePage() {
   const all = Object.values(TEMPLATES);

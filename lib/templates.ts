@@ -1,4 +1,4 @@
-export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'custom';
+export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'halloween' | 'custom';
 
 export interface PaletteOption {
   id: string;
@@ -34,6 +34,7 @@ export const FONT_OPTIONS = [
   { id: 'poppins', name: 'Poppins', family: "'Poppins', sans-serif", url: 'Poppins:wght@400;500;600;700' },
   { id: 'dancing', name: 'Dancing Script', family: "'Dancing Script', cursive", url: 'Dancing+Script:wght@400;500;600;700' },
   { id: 'nunito', name: 'Nunito', family: "'Nunito', sans-serif", url: 'Nunito:wght@400;500;600;700;800' },
+  { id: 'creepster', name: 'Creepster', family: "'Creepster', system-ui, cursive", url: 'Creepster' },
 ] as const;
 
 // Emoji choices for the "Build Your Own" (custom) template
@@ -118,6 +119,21 @@ export const TEMPLATES: Record<TemplateId, TemplateConfig> = {
       { id: 'bubblegum', name: 'Bubblegum', bg: '#FFF0F6', bgGradientFrom: '#FFE0EB', bgGradientTo: '#FFF0F6', primary: '#EC4899', primaryForeground: '#FFFFFF', secondary: '#FBCFE8', secondaryForeground: '#BE185D', text: '#500724', muted: '#F9A8D4', accent: '#F472B6', font: 'pacifico' },
       { id: 'ocean', name: 'Ocean', bg: '#F0F9FF', bgGradientFrom: '#E0F2FE', bgGradientTo: '#F0F9FF', primary: '#0EA5E9', primaryForeground: '#FFFFFF', secondary: '#BAE6FD', secondaryForeground: '#0369A1', text: '#0C4A6E', muted: '#7DD3FC', accent: '#38BDF8', font: 'nunito' },
       { id: 'forest', name: 'Forest', bg: '#F0FDF4', bgGradientFrom: '#DCFCE7', bgGradientTo: '#F0FDF4', primary: '#16A34A', primaryForeground: '#FFFFFF', secondary: '#BBF7D0', secondaryForeground: '#15803D', text: '#14532D', muted: '#86EFAC', accent: '#4ADE80', font: 'nunito' },
+    ],
+  },
+  halloween: {
+    id: 'halloween',
+    emoji: '🎃',
+    label: 'Halloween',
+    defaultQuestion: 'Will you join my Halloween party? 🎃',
+    celebrationEmojis: ['🎃', '👻', '🕷️', '🕸️', '💀', '🦇', '🧛', '🧙', '⚰️', '🍬'],
+    celebrationMessage: 'SPOOKY YES! 🎃👻',
+    defaultPalette: 'pumpkin',
+    palettes: [
+      { id: 'pumpkin', name: 'Pumpkin', bg: '#140A02', bgGradientFrom: '#2A1405', bgGradientTo: '#140A02', primary: '#F97316', primaryForeground: '#140A02', secondary: '#431407', secondaryForeground: '#FDBA74', text: '#FFEDD5', muted: '#9A3412', accent: '#FB923C', font: 'creepster' },
+      { id: 'haunted', name: 'Haunted Night', bg: '#0E0618', bgGradientFrom: '#1E0B33', bgGradientTo: '#0E0618', primary: '#FB923C', primaryForeground: '#0E0618', secondary: '#3B0764', secondaryForeground: '#E9D5FF', text: '#F5F3FF', muted: '#7C3AED', accent: '#A855F7', font: 'creepster' },
+      { id: 'witch', name: "Witch's Brew", bg: '#04140A', bgGradientFrom: '#0A2A16', bgGradientTo: '#04140A', primary: '#84CC16', primaryForeground: '#04140A', secondary: '#1A2E05', secondaryForeground: '#D9F99D', text: '#ECFCCB', muted: '#4D7C0F', accent: '#A3E635', font: 'creepster' },
+      { id: 'ghost', name: 'Friendly Ghost', bg: '#FBF7FF', bgGradientFrom: '#F3EEFF', bgGradientTo: '#FFF7ED', primary: '#EA580C', primaryForeground: '#FFFFFF', secondary: '#EDE9FE', secondaryForeground: '#6D28D9', text: '#2E1065', muted: '#C4B5FD', accent: '#F97316', font: 'nunito' },
     ],
   },
   custom: {
