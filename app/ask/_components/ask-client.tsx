@@ -155,17 +155,43 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
       {/* Ambient floating emojis */}
       {!celebrated && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {(celebrationEmojis?.slice?.(0, 6) ?? []).map((emoji: string, i: number) => (
-            <motion.span
-              key={`ambient-${i}`}
-              className="absolute text-3xl opacity-10"
-              initial={{ x: `${10 + i * 15}%`, y: '110%' }}
-              animate={{ y: '-10%', rotate: 360, opacity: [0.05, 0.15, 0.05] }}
-              transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 1.5, ease: 'linear' }}
-            >
-              {emoji}
-            </motion.span>
-          ))}
+          {(() => {
+            const base = celebrationEmojis?.slice?.(0, 6) ?? [];
+            const field = base.length ? [...base, ...base].slice(0, 10) : [];
+            // Deterministic scattered positions (percent of viewport) so the
+            // layout is identical in dev and static export builds.
+            const spots = [
+              { left: 8, top: 14 }, { left: 82, top: 10 }, { left: 24, top: 70 },
+              { left: 68, top: 60 }, { left: 46, top: 8 }, { left: 90, top: 46 },
+              { left: 6, top: 48 }, { left: 54, top: 80 }, { left: 34, top: 36 },
+              { left: 74, top: 86 },
+            ];
+            return field.map((emoji: string, i: number) => {
+              const spot = spots[i % spots.length];
+              return (
+                <motion.span
+                  key={`ambient-${i}`}
+                  className="absolute"
+                  style={{
+                    fontSize: `${2.2 + (i % 3) * 1.1}rem`,
+                    left: `${spot.left}%`,
+                    top: `${spot.top}%`,
+                    filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.25))',
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    y: [0, -22, 0],
+                    rotate: i % 2 === 0 ? [0, 12, 0] : [0, -12, 0],
+                    opacity: [0.5, 0.85, 0.5],
+                    scale: [0.9, 1, 0.9],
+                  }}
+                  transition={{ duration: 5 + (i % 5), repeat: Infinity, delay: i * 0.5, ease: 'easeInOut' }}
+                >
+                  {emoji}
+                </motion.span>
+              );
+            });
+          })()}
         </div>
       )}
 
@@ -297,6 +323,23 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
             >
               That was the right choice! 😊
             </motion.p>
+
+            {/* Call to action — let the viewer make their own */}
+            <motion.a
+              href="/create"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, type: 'spring', bounce: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block mt-8 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
+              style={{
+                backgroundColor: palette?.primary ?? '#e11d48',
+                color: palette?.primaryForeground ?? '#fff',
+              }}
+            >
+              Create your own {displayEmoji}
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
