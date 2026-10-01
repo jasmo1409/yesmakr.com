@@ -155,22 +155,17 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
       {/* Ambient floating emojis */}
       {!celebrated && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {(() => {
-            const base = celebrationEmojis?.slice?.(0, 6) ?? [];
-            const field = base.length ? [...base, ...base].slice(0, 10) : [];
-            return field.map((emoji: string, i: number) => (
-              <motion.span
-                key={`ambient-${i}`}
-                className="absolute"
-                style={{ fontSize: `${1.6 + (i % 3) * 0.9}rem`, left: `${(i * 9.5 + 4) % 92}%` }}
-                initial={{ y: '115%', opacity: 0 }}
-                animate={{ y: '-15%', rotate: i % 2 === 0 ? 360 : -360, opacity: [0.08, 0.22, 0.08] }}
-                transition={{ duration: 9 + (i % 5) * 2, repeat: Infinity, delay: i * 1.1, ease: 'linear' }}
-              >
-                {emoji}
-              </motion.span>
-            ));
-          })()}
+          {(celebrationEmojis?.slice?.(0, 6) ?? []).map((emoji: string, i: number) => (
+            <motion.span
+              key={`ambient-${i}`}
+              className="absolute text-3xl opacity-10"
+              initial={{ x: `${10 + i * 15}%`, y: '110%' }}
+              animate={{ y: '-10%', rotate: 360, opacity: [0.05, 0.15, 0.05] }}
+              transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 1.5, ease: 'linear' }}
+            >
+              {emoji}
+            </motion.span>
+          ))}
         </div>
       )}
 
@@ -302,23 +297,6 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
             >
               That was the right choice! 😊
             </motion.p>
-
-            {/* Call to action — let the viewer make their own */}
-            <motion.a
-              href="/create"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, type: 'spring', bounce: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block mt-8 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
-              style={{
-                backgroundColor: palette?.primary ?? '#e11d48',
-                color: palette?.primaryForeground ?? '#fff',
-              }}
-            >
-              Create your own {displayEmoji}
-            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
