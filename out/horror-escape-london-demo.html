@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Horror Escape London — Dare to Survive?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --red: #8B0000;
+    --red-bright: #C81E1E;
+    --black: #0A0506;
+    --black-2: #1A0A0C;
+    --cream: #F5EFE6;
+    --cream-dim: #C9BCB0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: radial-gradient(circle at 50% 0%, var(--black-2) 0%, var(--black) 70%);
+    color: var(--cream);
+    overflow: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+  .stage {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px 72px;
+    text-align: center;
+  }
+
+  /* ---------- Brand header ---------- */
+  .brand {
+    position: fixed;
+    top: 22px;
+    left: 0; right: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    pointer-events: none;
+  }
+  .brand .logo {
+    width: 46px; height: 46px;
+    flex: none;
+    filter: drop-shadow(0 2px 8px rgba(200,30,30,0.45));
+  }
+  .brand .name {
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    line-height: 1.1;
+    text-align: left;
+  }
+  .brand .name small {
+    display: block;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    font-size: 0.6rem;
+    color: var(--red-bright);
+  }
+
+  /* ---------- Floating ambient decorations ---------- */
+  .floaters { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .floater {
+    position: absolute;
+    opacity: 0.5;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+    animation: bob var(--dur, 6s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    will-change: transform, opacity;
+  }
+  @keyframes bob {
+    0%   { transform: translateY(0) rotate(0deg) scale(0.95); opacity: 0.45; }
+    50%  { transform: translateY(-22px) rotate(var(--rot, 10deg)) scale(1.05); opacity: 0.8; }
+    100% { transform: translateY(0) rotate(0deg) scale(0.95); opacity: 0.45; }
+  }
+
+  /* ---------- Question card ---------- */
+  .emoji-hero {
+    font-size: clamp(4rem, 14vw, 7rem);
+    line-height: 1;
+    margin-bottom: 18px;
+    animation: bob 2.6s ease-in-out infinite;
+    filter: drop-shadow(0 4px 16px rgba(200,30,30,0.5));
+  }
+  h1.question {
+    font-family: 'Creepster', 'Poppins', cursive;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    font-size: clamp(2.1rem, 7vw, 3.6rem);
+    line-height: 1.12;
+    max-width: 15ch;
+    margin: 0 auto 8px;
+    color: var(--cream);
+    text-shadow: 0 3px 20px rgba(0,0,0,0.6), 0 0 28px rgba(139,0,0,0.5);
+  }
+  .subtitle {
+    color: var(--cream-dim);
+    font-size: 0.98rem;
+    max-width: 34ch;
+    margin: 0 auto 38px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-area {
+    position: relative;
+    min-height: 180px;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .btn-yes {
+    background: linear-gradient(135deg, var(--red-bright), var(--red));
+    color: var(--cream);
+    font-size: 1.3rem;
+    padding: 18px 44px;
+    box-shadow: 0 10px 30px rgba(139,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05) inset;
+    animation: glow 2.2s ease-in-out infinite;
+  }
+  .btn-yes:hover { transform: scale(1.05); }
+  @keyframes glow {
+    0%,100% { box-shadow: 0 10px 30px rgba(139,0,0,0.45); }
+    50%     { box-shadow: 0 10px 44px rgba(200,30,30,0.85); }
+  }
+  .btn-no {
+    background: rgba(245,239,230,0.16);
+    color: var(--cream);
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 13px 34px;
+    border: 1.5px solid rgba(245,239,230,0.6);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+    transition: left 0.12s ease, top 0.12s ease, transform 0.12s ease;
+  }
+  .btn-no:hover { background: rgba(245,239,230,0.24); }
+  .taunt {
+    min-height: 22px;
+    color: var(--red-bright);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* ---------- Celebration overlay ---------- */
+  .celebrate {
+    position: fixed; inset: 0; z-index: 40;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    background: radial-gradient(circle at 50% 30%, var(--black-2) 0%, var(--black) 75%);
+  }
+  .celebrate.show { display: flex; animation: fadein 0.5s ease both; }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  .celebrate .big {
+    font-size: clamp(4.5rem, 16vw, 8rem);
+    animation: pop 0.8s cubic-bezier(.18,.89,.32,1.28) both;
+    filter: drop-shadow(0 6px 22px rgba(200,30,30,0.6));
+  }
+  @keyframes pop { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  .celebrate h2 {
+    font-family: 'Creepster', cursive;
+    font-weight: 400;
+    font-size: clamp(2.3rem, 8vw, 3.8rem);
+    margin: 10px 0 6px;
+    color: var(--cream);
+    text-shadow: 0 0 26px rgba(139,0,0,0.6);
+  }
+  .celebrate p { color: var(--cream-dim); font-size: 1.1rem; margin-bottom: 30px; }
+  .btn-book {
+    display: inline-block;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--red-bright), var(--red));
+    color: var(--cream);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 18px 42px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(139,0,0,0.6);
+    animation: glow 2.2s ease-in-out infinite;
+    transition: transform 0.18s ease;
+  }
+  .btn-book:hover { transform: scale(1.05); }
+  .celebrate .replay {
+    margin-top: 20px;
+    background: none; border: none;
+    color: var(--cream-dim);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+    opacity: 0.7;
+  }
+
+  /* confetti rain */
+  .rain { position: fixed; inset: 0; z-index: 35; pointer-events: none; overflow: hidden; }
+  .rain span {
+    position: absolute;
+    top: -10%;
+    font-size: 1.8rem;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(120vh) rotate(520deg); opacity: 0.2; }
+  }
+
+  /* footer badge */
+  .made {
+    position: fixed; bottom: 16px; left: 0; right: 0;
+    text-align: center; z-index: 25;
+    font-size: 0.72rem; color: var(--cream-dim); opacity: 0.55;
+    letter-spacing: 0.04em;
+  }
+  .made b { color: var(--red-bright); font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <!-- Brand -->
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Horror Escape London logo">
+      <rect x="12" y="6" width="40" height="52" rx="20" fill="#1A0A0C" stroke="#C81E1E" stroke-width="2.5"/>
+      <path d="M32 12c-9 0-16 7-16 16v20c0 2 2 4 4 4h3v-8a3 3 0 0 1 6 0v8h6v-8a3 3 0 0 1 6 0v8h3c2 0 4-2 4-4V28c0-9-7-16-16-16z" fill="#8B0000"/>
+      <circle cx="25" cy="30" r="4.5" fill="#0A0506"/>
+      <circle cx="39" cy="30" r="4.5" fill="#0A0506"/>
+      <circle cx="25" cy="30" r="1.6" fill="#C81E1E"/>
+      <circle cx="39" cy="30" r="1.6" fill="#C81E1E"/>
+      <path d="M29 40l3-4 3 4-3 3z" fill="#0A0506"/>
+    </svg>
+    <div class="name">Horror Escape<br/>London<small>Live Escape Rooms</small></div>
+  </div>
+
+  <!-- Floating decorations (populated by JS with explicit scattered positions) -->
+  <div class="floaters" id="floaters"></div>
+
+  <!-- Question stage -->
+  <main class="stage" id="stage">
+    <div class="emoji-hero">💀</div>
+    <h1 class="question">Dare to survive the scariest escape room in London?</h1>
+    <p class="subtitle">60 minutes. One locked room. Can your team make it out alive?</p>
+
+    <div class="btn-area" id="btnArea">
+      <button class="btn btn-yes" id="yesBtn">Yes, I dare 💀</button>
+      <button class="btn btn-no" id="noBtn">No, too scary</button>
+      <div class="taunt" id="taunt"></div>
+    </div>
+  </main>
+
+  <!-- Celebration -->
+  <div class="celebrate" id="celebrate">
+    <div class="big">🎃</div>
+    <h2>You’re braver than most…</h2>
+    <p>Welcome, challenger. Your nightmare awaits.</p>
+    <a class="btn-book" id="bookBtn" href="https://www.horrorescape.co.uk" target="_blank" rel="noopener">Book Your Experience →</a>
+    <button class="replay" id="replayBtn">↺ replay demo</button>
+  </div>
+
+  <div class="made">A branded demo by <b>YesMakr</b> · horrorescape.co.uk</div>
+
+<script>
+(function () {
+  var EMOJIS = ['👻','🎃','🕷️','🕸️','💀','🦇'];
+  // Explicit scattered positions (percent) so the layout is stable everywhere.
+  var SPOTS = [
+    {l:8,t:16},{l:84,t:12},{l:22,t:72},{l:70,t:64},{l:46,t:9},
+    {l:90,t:48},{l:5,t:50},{l:56,t:82},{l:34,t:38},{l:76,t:88}
+  ];
+  var field = document.getElementById('floaters');
+  for (var i = 0; i < 10; i++) {
+    var s = SPOTS[i % SPOTS.length];
+    var el = document.createElement('span');
+    el.className = 'floater';
+    el.textContent = EMOJIS[i % EMOJIS.length];
+    el.style.left = s.l + '%';
+    el.style.top = s.t + '%';
+    el.style.fontSize = (2.2 + (i % 3) * 1.0) + 'rem';
+    el.style.setProperty('--dur', (5 + (i % 5)) + 's');
+    el.style.setProperty('--delay', (i * 0.5) + 's');
+    el.style.setProperty('--rot', (i % 2 === 0 ? 12 : -12) + 'deg');
+    field.appendChild(el);
+  }
+
+  // ----- Runaway No button -----
+  var noBtn = document.getElementById('noBtn');
+  var yesBtn = document.getElementById('yesBtn');
+  var taunt = document.getElementById('taunt');
+  var dodges = 0;
+  var TAUNTS = ['Oops! Try again 😈',"You can't escape! 😄",'Almost there... 😂','Just say yes already! 🤣',"Nice try! 👻",'The room always wins 🎃'];
+
+  function dodge() {
+    dodges++;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var bw = noBtn.offsetWidth || 140, bh = noBtn.offsetHeight || 50;
+    var pad = 16;
+    var yesRect = yesBtn.getBoundingClientRect();
+    var x = 0, y = 0, tries = 0;
+    do {
+      x = pad + Math.random() * (vw - bw - pad * 2);
+      y = pad + Math.random() * (vh - bh - pad * 2);
+      tries++;
+    } while (tries < 30 && (
+      x < yesRect.right + 24 && x + bw > yesRect.left - 24 &&
+      y < yesRect.bottom + 24 && y + bh > yesRect.top - 24
+    ));
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+    noBtn.style.margin = '0';
+    taunt.textContent = TAUNTS[(dodges - 1) % TAUNTS.length];
+  }
+  // Endless chase: the No button always keeps running so visitors can keep trying to catch it.
+  noBtn.addEventListener('mouseenter', dodge);
+  noBtn.addEventListener('click', function (e) { e.preventDefault(); dodge(); });
+  noBtn.addEventListener('touchstart', function (e) { e.preventDefault(); dodge(); }, { passive: false });
+
+  // ----- Celebration -----
+  var stage = document.getElementById('stage');
+  var celebrate_el = document.getElementById('celebrate');
+  function makeRain() {
+    var rain = document.createElement('div');
+    rain.className = 'rain';
+    rain.id = 'rain';
+    for (var i = 0; i < 44; i++) {
+      var s = document.createElement('span');
+      s.textContent = EMOJIS[i % EMOJIS.length];
+      s.style.left = Math.random() * 100 + '%';
+      s.style.fontSize = (1.4 + Math.random() * 2) + 'rem';
+      s.style.animationDuration = (2.4 + Math.random() * 3) + 's';
+      s.style.animationDelay = (Math.random() * 1.8) + 's';
+      rain.appendChild(s);
+    }
+    document.body.appendChild(rain);
+  }
+  function celebrate() {
+    stage.style.display = 'none';
+    document.getElementById('floaters').style.display = 'none';
+    celebrate_el.classList.add('show');
+    makeRain();
+  }
+  yesBtn.addEventListener('click', celebrate);
+
+  // ----- Replay (demo convenience) -----
+  document.getElementById('replayBtn').addEventListener('click', function () {
+    window.location.reload();
+  });
+})();
+</script>
+</body>
+</html>
