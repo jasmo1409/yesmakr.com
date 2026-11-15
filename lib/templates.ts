@@ -1,4 +1,4 @@
-export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'halloween' | 'friendsgiving' | 'thanksgiving' | 'blackfriday' | 'christmas' | 'christmasmarket' | 'secretsanta' | 'dune' | 'doomsday' | 'custom';
+export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'halloween' | 'friendsgiving' | 'thanksgiving' | 'blackfriday' | 'christmas' | 'christmasmarket' | 'secretsanta' | 'dune' | 'doomsday' | 'newyearseve' | 'custom';
 
 export interface PaletteOption {
   id: string;
@@ -252,6 +252,20 @@ export const TEMPLATES: Record<TemplateId, TemplateConfig> = {
       { id: 'doomsday', name: 'Doomsday', bg: '#0A0E0A', bgGradientFrom: '#111A12', bgGradientTo: '#0A0E0A', primary: '#22C55E', primaryForeground: '#0A0E0A', secondary: '#1C2A20', secondaryForeground: '#86EFAC', text: '#E6F2E6', muted: '#4D7C4F', accent: '#4ADE80', font: 'bungee' },
       { id: 'steelstorm', name: 'Steel Storm', bg: '#0B0D10', bgGradientFrom: '#171B20', bgGradientTo: '#0B0D10', primary: '#9CA3AF', primaryForeground: '#0B0D10', secondary: '#1F2937', secondaryForeground: '#D1D5DB', text: '#ECEFF3', muted: '#4B5563', accent: '#34D399', font: 'bungee' },
       { id: 'toxicwar', name: 'Toxic War', bg: '#070A07', bgGradientFrom: '#0E160E', bgGradientTo: '#070A07', primary: '#16A34A', primaryForeground: '#FFFFFF', secondary: '#14281A', secondaryForeground: '#A7F3D0', text: '#DFF5E3', muted: '#3F6F47', accent: '#22C55E', font: 'bungee' },
+    ],
+  },
+  newyearseve: {
+    id: 'newyearseve',
+    emoji: '🥂',
+    label: "New Year's Eve",
+    defaultQuestion: "Will you celebrate New Year's Eve with me? 🥂",
+    celebrationEmojis: ['🥂', '🎆', '🎇', '✨', '🍾', '⭐', '🎉', '🕛', '🌟', '🎊'],
+    celebrationMessage: 'Happy New Year! 🥂🎆',
+    defaultPalette: 'midnight-gold',
+    palettes: [
+      { id: 'midnight-gold', name: 'Midnight Gold', bg: '#0A0E1A', bgGradientFrom: '#141B2E', bgGradientTo: '#0A0E1A', primary: '#D4AF37', primaryForeground: '#0A0E1A', secondary: '#1C2541', secondaryForeground: '#F5E6B8', text: '#F5F0E6', muted: '#8A7B4A', accent: '#E8C860', font: 'playfair' },
+      { id: 'champagne-night', name: 'Champagne Night', bg: '#120D08', bgGradientFrom: '#241A0E', bgGradientTo: '#120D08', primary: '#E8C860', primaryForeground: '#120D08', secondary: '#3A2A14', secondaryForeground: '#F7E4A8', text: '#FBF3DE', muted: '#9A7F43', accent: '#F5D97A', font: 'playfair' },
+      { id: 'platinum', name: 'Platinum', bg: '#F7F6F2', bgGradientFrom: '#ECEBE4', bgGradientTo: '#F7F6F2', primary: '#B8942E', primaryForeground: '#FFFFFF', secondary: '#E5DFC8', secondaryForeground: '#5C4A14', text: '#1E1B12', muted: '#C9B873', accent: '#D4AF37', font: 'playfair' },
     ],
   },
   custom: {

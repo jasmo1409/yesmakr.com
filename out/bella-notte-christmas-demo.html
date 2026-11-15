@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bella Notte — Christmas Eve Dinner for Two</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --burgundy: #6B1E2E;
+    --burgundy-deep: #2A0C14;
+    --burgundy-mid: #4A1420;
+    --gold: #C9A84C;
+    --gold-bright: #E6C76A;
+    --cream: #F7EFE2;
+    --cream-dim: #D8C7B0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: radial-gradient(circle at 50% 0%, var(--burgundy-mid) 0%, var(--burgundy-deep) 72%);
+    color: var(--cream);
+    overflow: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+  /* subtle gold vignette frame */
+  body::after {
+    content: '';
+    position: fixed; inset: 14px;
+    border: 1px solid rgba(201,168,76,0.28);
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 28;
+  }
+  .stage {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px 80px;
+    text-align: center;
+  }
+
+  /* ---------- Brand header ---------- */
+  .brand {
+    position: fixed;
+    top: 26px;
+    left: 0; right: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    pointer-events: none;
+  }
+  .brand .logo {
+    width: 44px; height: 44px;
+    flex: none;
+    filter: drop-shadow(0 2px 8px rgba(201,168,76,0.4));
+  }
+  .brand .name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.1rem;
+    line-height: 0.9;
+    color: var(--gold-bright);
+    text-align: left;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+  .brand .name small {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    font-size: 0.56rem;
+    color: var(--cream-dim);
+    margin-top: 2px;
+    padding-left: 3px;
+  }
+
+  /* ---------- Floating ambient decorations ---------- */
+  .floaters { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .floater {
+    position: absolute;
+    opacity: 0.5;
+    filter: drop-shadow(0 2px 7px rgba(0,0,0,0.55));
+    animation: bob var(--dur, 6s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+    will-change: transform, opacity;
+  }
+  @keyframes bob {
+    0%   { transform: translateY(0) rotate(0deg) scale(0.95); opacity: 0.45; }
+    50%  { transform: translateY(-20px) rotate(var(--rot, 8deg)) scale(1.06); opacity: 0.82; }
+    100% { transform: translateY(0) rotate(0deg) scale(0.95); opacity: 0.45; }
+  }
+
+  /* ---------- Question ---------- */
+  .emoji-hero {
+    font-size: clamp(3.4rem, 12vw, 6rem);
+    line-height: 1;
+    margin-bottom: 14px;
+    animation: bob 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 16px rgba(201,168,76,0.4));
+  }
+  .eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 0.72rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  h1.question {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.01em;
+    font-size: clamp(2.1rem, 6.5vw, 3.7rem);
+    line-height: 1.16;
+    max-width: 16ch;
+    margin: 0 auto 14px;
+    color: var(--cream);
+    text-shadow: 0 3px 20px rgba(0,0,0,0.55);
+  }
+  .subtitle {
+    color: var(--cream-dim);
+    font-size: 1.18rem;
+    letter-spacing: 0.01em;
+    max-width: 40ch;
+    margin: 0 auto 40px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-area {
+    position: relative;
+    min-height: 180px;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .btn {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 14px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .btn-yes {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #3A1018;
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+    padding: 17px 46px;
+    box-shadow: 0 10px 30px rgba(201,168,76,0.4), 0 0 0 1px rgba(255,255,255,0.12) inset;
+    animation: glow 2.6s ease-in-out infinite;
+  }
+  .btn-yes:hover { transform: scale(1.05); }
+  @keyframes glow {
+    0%,100% { box-shadow: 0 10px 30px rgba(201,168,76,0.32); }
+    50%     { box-shadow: 0 10px 46px rgba(230,199,106,0.7); }
+  }
+  .btn-no {
+    background: rgba(247,239,226,0.14);
+    color: var(--cream);
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 13px 34px;
+    border: 1.5px solid rgba(247,239,226,0.55);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: left 0.12s ease, top 0.12s ease, transform 0.12s ease, background 0.2s ease;
+  }
+  .btn-no:hover { background: rgba(247,239,226,0.22); }
+  .taunt {
+    min-height: 22px;
+    color: var(--gold-bright);
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* ---------- Celebration overlay ---------- */
+  .celebrate {
+    position: fixed; inset: 0; z-index: 40;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    background: radial-gradient(circle at 50% 30%, var(--burgundy-mid) 0%, var(--burgundy-deep) 76%);
+  }
+  .celebrate.show { display: flex; animation: fadein 0.6s ease both; }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  .celebrate .big {
+    font-size: clamp(4rem, 15vw, 7.5rem);
+    animation: pop 0.8s cubic-bezier(.18,.89,.32,1.28) both;
+    filter: drop-shadow(0 6px 22px rgba(201,168,76,0.5));
+  }
+  @keyframes pop { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  .celebrate h2 {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    font-size: clamp(2.8rem, 9vw, 4.6rem);
+    margin: 8px 0 4px;
+    color: var(--gold-bright);
+    text-shadow: 0 2px 22px rgba(0,0,0,0.5);
+  }
+  .celebrate p { color: var(--cream-dim); font-size: 1.22rem; margin-bottom: 32px; max-width: 32ch; }
+  .btn-book {
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #3A1018;
+    font-weight: 700;
+    font-size: 1.24rem;
+    padding: 18px 44px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(201,168,76,0.5);
+    animation: glow 2.6s ease-in-out infinite;
+    transition: transform 0.18s ease;
+  }
+  .btn-book:hover { transform: scale(1.05); }
+  .celebrate .replay {
+    margin-top: 22px;
+    background: none; border: none;
+    color: var(--cream-dim);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+    opacity: 0.65;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* confetti rain */
+  .rain { position: fixed; inset: 0; z-index: 35; pointer-events: none; overflow: hidden; }
+  .rain span { position: absolute; top: -10%; font-size: 1.8rem; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(120vh) rotate(480deg); opacity: 0.2; } }
+
+  /* footer badge */
+  .made {
+    position: fixed; bottom: 20px; left: 0; right: 0;
+    text-align: center; z-index: 29;
+    font-size: 0.74rem; color: var(--cream-dim); opacity: 0.6;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .made b { color: var(--gold); font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <!-- Brand -->
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Bella Notte logo">
+      <!-- wine glass -->
+      <path d="M20 10h12c0 8-2 13-6 15-4-2-6-7-6-15z" fill="#6B1E2E" stroke="#C9A84C" stroke-width="1.6"/>
+      <path d="M26 25v18" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M20 46h12" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round"/>
+      <!-- candle flame -->
+      <ellipse cx="44" cy="20" rx="3.4" ry="5.4" fill="#E6C76A"/>
+      <ellipse cx="44" cy="21" rx="1.5" ry="2.8" fill="#6B1E2E"/>
+      <rect x="40.5" y="27" width="7" height="20" rx="1.6" fill="#C9A84C"/>
+    </svg>
+    <div class="name">Bella Notte<small>Ristorante</small></div>
+  </div>
+
+  <!-- Floating decorations -->
+  <div class="floaters" id="floaters"></div>
+
+  <!-- Question stage -->
+  <main class="stage" id="stage">
+    <div class="emoji-hero">🎄</div>
+    <div class="eyebrow">Christmas Eve dinner for two</div>
+    <h1 class="question">Will you spend Christmas Eve with me? 🎄</h1>
+    <p class="subtitle">An intimate candlelit evening, a five-course tasting menu, and a table reserved just for the two of you.</p>
+
+    <div class="btn-area" id="btnArea">
+      <button class="btn btn-yes" id="yesBtn">Yes, with you 🕯️</button>
+      <button class="btn btn-no" id="noBtn">Maybe not</button>
+      <div class="taunt" id="taunt"></div>
+    </div>
+  </main>
+
+  <!-- Celebration -->
+  <div class="celebrate" id="celebrate">
+    <div class="big">🎄</div>
+    <h2>It's a date!</h2>
+    <p>Your Christmas Eve table for two awaits. Let's make it unforgettable.</p>
+    <a class="btn-book" id="bookBtn" href="#" target="_blank" rel="noopener">Reserve our table →</a>
+    <button class="replay" id="replayBtn">↺ replay demo</button>
+  </div>
+
+  <div class="made">A branded demo by <b>YesMakr</b> · bellanotte.com</div>
+
+<script>
+(function () {
+  var EMOJIS = ['🎄','⭐','❄️','🎁','🕯️','🔔','✨','🍷'];
+  var SPOTS = [
+    {l:8,t:16},{l:84,t:12},{l:22,t:72},{l:70,t:64},{l:46,t:9},
+    {l:90,t:48},{l:5,t:50},{l:56,t:82},{l:34,t:38},{l:76,t:88}
+  ];
+  var field = document.getElementById('floaters');
+  for (var i = 0; i < 10; i++) {
+    var s = SPOTS[i % SPOTS.length];
+    var el = document.createElement('span');
+    el.className = 'floater';
+    el.textContent = EMOJIS[i % EMOJIS.length];
+    el.style.left = s.l + '%';
+    el.style.top = s.t + '%';
+    el.style.fontSize = (2.1 + (i % 3) * 0.9) + 'rem';
+    el.style.setProperty('--dur', (5 + (i % 5)) + 's');
+    el.style.setProperty('--delay', (i * 0.5) + 's');
+    el.style.setProperty('--rot', (i % 2 === 0 ? 10 : -10) + 'deg');
+    field.appendChild(el);
+  }
+
+  // ----- Runaway No button (endless chase) -----
+  var noBtn = document.getElementById('noBtn');
+  var yesBtn = document.getElementById('yesBtn');
+  var taunt = document.getElementById('taunt');
+  var dodges = 0;
+  var TAUNTS = ['Oh, come on 😊','The table is already booked 🕯️','You know you want to ✨','Say yes, cara mia ❤️','Too late to resist 🍷','One magical evening awaits 🎄'];
+
+  function dodge() {
+    dodges++;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var bw = noBtn.offsetWidth || 140, bh = noBtn.offsetHeight || 50;
+    var pad = 16;
+    var yesRect = yesBtn.getBoundingClientRect();
+    var x = 0, y = 0, tries = 0;
+    do {
+      x = pad + Math.random() * (vw - bw - pad * 2);
+      y = pad + Math.random() * (vh - bh - pad * 2);
+      tries++;
+    } while (tries < 30 && (
+      x < yesRect.right + 24 && x + bw > yesRect.left - 24 &&
+      y < yesRect.bottom + 24 && y + bh > yesRect.top - 24
+    ));
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+    noBtn.style.margin = '0';
+    taunt.textContent = TAUNTS[(dodges - 1) % TAUNTS.length];
+  }
+  noBtn.addEventListener('mouseenter', dodge);
+  noBtn.addEventListener('click', function (e) { e.preventDefault(); dodge(); });
+  noBtn.addEventListener('touchstart', function (e) { e.preventDefault(); dodge(); }, { passive: false });
+
+  // ----- Celebration -----
+  var stage = document.getElementById('stage');
+  var celebrate_el = document.getElementById('celebrate');
+  function makeRain() {
+    var rain = document.createElement('div');
+    rain.className = 'rain';
+    for (var i = 0; i < 44; i++) {
+      var s = document.createElement('span');
+      s.textContent = EMOJIS[i % EMOJIS.length];
+      s.style.left = Math.random() * 100 + '%';
+      s.style.fontSize = (1.4 + Math.random() * 2) + 'rem';
+      s.style.animationDuration = (2.4 + Math.random() * 3) + 's';
+      s.style.animationDelay = (Math.random() * 1.8) + 's';
+      rain.appendChild(s);
+    }
+    document.body.appendChild(rain);
+  }
+  function celebrate() {
+    stage.style.display = 'none';
+    document.getElementById('floaters').style.display = 'none';
+    celebrate_el.classList.add('show');
+    makeRain();
+  }
+  yesBtn.addEventListener('click', celebrate);
+
+  document.getElementById('replayBtn').addEventListener('click', function () { window.location.reload(); });
+})();
+</script>
+</body>
+</html>

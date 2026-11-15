@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2, Ghost, Drumstick, UtensilsCrossed, ShoppingBag, TreePine, Store, Gift, Sun, Swords } from 'lucide-react';
+import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2, Ghost, Drumstick, UtensilsCrossed, ShoppingBag, TreePine, Store, Gift, Sun, Swords, PartyPopper } from 'lucide-react';
 import Link from 'next/link';
 import type { TemplateConfig } from '@/lib/templates';
 
@@ -21,6 +21,7 @@ const TEMPLATE_ICONS: Record<string, React.ReactNode> = {
   secretsanta: <Gift className="w-8 h-8" />,
   dune: <Sun className="w-8 h-8" />,
   doomsday: <Swords className="w-8 h-8" />,
+  newyearseve: <PartyPopper className="w-8 h-8" />,
   custom: <Wand2 className="w-8 h-8" />,
 };
 
@@ -39,6 +40,7 @@ const CARD_GRADIENTS: Record<string, string> = {
   secretsanta: 'from-indigo-900 to-slate-400',
   dune: 'from-amber-500 to-orange-700',
   doomsday: 'from-green-500 to-gray-900',
+  newyearseve: 'from-slate-900 to-amber-400',
   custom: 'from-slate-500 to-indigo-600',
 };
 
@@ -57,6 +59,7 @@ const CARD_BG_LIGHT: Record<string, string> = {
   secretsanta: 'bg-indigo-50',
   dune: 'bg-amber-50',
   doomsday: 'bg-green-50',
+  newyearseve: 'bg-amber-50',
   custom: 'bg-slate-50',
 };
 
