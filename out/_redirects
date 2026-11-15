@@ -1,7 +1,9 @@
 /halloween /ask?template=halloween&question=Will+you+join+my+Halloween+party%3F+%F0%9F%8E%83&palette=pumpkin&font=creepster 302
 /halloween/ /ask?template=halloween&question=Will+you+join+my+Halloween+party%3F+%F0%9F%8E%83&palette=pumpkin&font=creepster 302
-/friendsgiving /ask?template=friendsgiving&question=Will+you+come+to+Friendsgiving%3F+%F0%9F%A6%83&palette=harvest&font=fredoka 302
-/friendsgiving/ /ask?template=friendsgiving&question=Will+you+come+to+Friendsgiving%3F+%F0%9F%A6%83&palette=harvest&font=fredoka 302
+/friendsgiving /ask?template=friendsgiving&question=Will+you+come+to+my+Friendsgiving%3F+%F0%9F%8D%97&palette=harvest&font=fredoka 302
+/friendsgiving/ /ask?template=friendsgiving&question=Will+you+come+to+my+Friendsgiving%3F+%F0%9F%8D%97&palette=harvest&font=fredoka 302
+/thanksgiving /ask?template=thanksgiving&question=Will+you+join+us+for+Thanksgiving+dinner%3F+%F0%9F%A6%83&palette=autumn-feast&font=playfair 302
+/thanksgiving/ /ask?template=thanksgiving&question=Will+you+join+us+for+Thanksgiving+dinner%3F+%F0%9F%A6%83&palette=autumn-feast&font=playfair 302
 /blackfriday /ask?template=blackfriday&question=Shall+we+go+shopping+together%3F+%F0%9F%9B%8D%EF%B8%8F&palette=blackgold&font=anton 302
 /blackfriday/ /ask?template=blackfriday&question=Shall+we+go+shopping+together%3F+%F0%9F%9B%8D%EF%B8%8F&palette=blackgold&font=anton 302
 /christmas /ask?template=christmas&question=Will+you+spend+Christmas+Eve+with+me%3F+%F0%9F%8E%84&palette=candlelight&font=greatvibes 302

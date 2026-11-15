@@ -1,4 +1,4 @@
-export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'halloween' | 'friendsgiving' | 'blackfriday' | 'christmas' | 'christmasmarket' | 'secretsanta' | 'dune' | 'doomsday' | 'custom';
+export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'halloween' | 'friendsgiving' | 'thanksgiving' | 'blackfriday' | 'christmas' | 'christmasmarket' | 'secretsanta' | 'dune' | 'doomsday' | 'custom';
 
 export interface PaletteOption {
   id: string;
@@ -144,16 +144,30 @@ export const TEMPLATES: Record<TemplateId, TemplateConfig> = {
   },
   friendsgiving: {
     id: 'friendsgiving',
-    emoji: '🦃',
+    emoji: '🍗',
     label: 'Friendsgiving',
-    defaultQuestion: 'Will you come to Friendsgiving? 🦃',
-    celebrationEmojis: ['🦃', '🍂', '🍁', '🌽', '🥧', '🍗', '🧡', '🍽️', '🤎', '🕯️'],
-    celebrationMessage: 'Friendsgiving it is! 🦃🍂',
+    defaultQuestion: 'Will you come to my Friendsgiving? 🍗',
+    celebrationEmojis: ['🍗', '🍂', '🍁', '🌽', '🥧', '🦃', '🧡', '🍽️', '🤎', '🕯️'],
+    celebrationMessage: 'Friendsgiving it is! 🍗🍂',
     defaultPalette: 'harvest',
     palettes: [
       { id: 'harvest', name: 'Harvest', bg: '#1C1206', bgGradientFrom: '#2E1C0A', bgGradientTo: '#1C1206', primary: '#EA580C', primaryForeground: '#FFF7ED', secondary: '#4A2C10', secondaryForeground: '#FDBA74', text: '#FFF1DE', muted: '#B45309', accent: '#F59E0B', font: 'fredoka' },
       { id: 'cream-harvest', name: 'Cream', bg: '#FFF8EE', bgGradientFrom: '#FFEFD8', bgGradientTo: '#FFF8EE', primary: '#C2410C', primaryForeground: '#FFFFFF', secondary: '#FDE4C8', secondaryForeground: '#7C2D12', text: '#4A2410', muted: '#D98B4A', accent: '#EA580C', font: 'fredoka' },
       { id: 'maple', name: 'Maple', bg: '#1A0F08', bgGradientFrom: '#3A1D0C', bgGradientTo: '#1A0F08', primary: '#D97706', primaryForeground: '#1A0F08', secondary: '#5B2C0E', secondaryForeground: '#FCD9A8', text: '#FBE8D0', muted: '#92400E', accent: '#F59E0B', font: 'fredoka' },
+    ],
+  },
+  thanksgiving: {
+    id: 'thanksgiving',
+    emoji: '🦃',
+    label: 'Thanksgiving',
+    defaultQuestion: 'Will you join us for Thanksgiving dinner? 🦃',
+    celebrationEmojis: ['🦃', '🍁', '🍂', '🥧', '🌽', '🙏', '🕯️', '🤎', '🍽️', '🌾'],
+    celebrationMessage: 'So much to be thankful for! 🦃🍁',
+    defaultPalette: 'autumn-feast',
+    palettes: [
+      { id: 'autumn-feast', name: 'Autumn Feast', bg: '#1A0808', bgGradientFrom: '#3A0F14', bgGradientTo: '#1A0808', primary: '#E0A526', primaryForeground: '#2A0A0A', secondary: '#4A1218', secondaryForeground: '#F0C97A', text: '#FBEAD0', muted: '#B4531F', accent: '#D4A017', font: 'playfair' },
+      { id: 'golden-harvest', name: 'Golden Harvest', bg: '#1E1408', bgGradientFrom: '#3E2810', bgGradientTo: '#1E1408', primary: '#E08A1E', primaryForeground: '#1E1408', secondary: '#5A3410', secondaryForeground: '#FBD9A0', text: '#FBEBD2', muted: '#9A5A16', accent: '#F0A830', font: 'playfair' },
+      { id: 'cream-classic', name: 'Cream', bg: '#FBF3E6', bgGradientFrom: '#F3E4CC', bgGradientTo: '#FBF3E6', primary: '#7C2D12', primaryForeground: '#FFFFFF', secondary: '#EBD6B8', secondaryForeground: '#5A2410', text: '#3A1E0E', muted: '#B07A3C', accent: '#B45309', font: 'playfair' },
     ],
   },
   blackfriday: {

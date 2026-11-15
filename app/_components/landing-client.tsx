@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2, Ghost, Drumstick, ShoppingBag, TreePine, Store, Gift, Sun, Swords } from 'lucide-react';
+import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2, Ghost, Drumstick, UtensilsCrossed, ShoppingBag, TreePine, Store, Gift, Sun, Swords } from 'lucide-react';
 import Link from 'next/link';
 import type { TemplateConfig } from '@/lib/templates';
 
@@ -14,6 +14,7 @@ const TEMPLATE_ICONS: Record<string, React.ReactNode> = {
   friendship: <PawPrint className="w-8 h-8" />,
   halloween: <Ghost className="w-8 h-8" />,
   friendsgiving: <Drumstick className="w-8 h-8" />,
+  thanksgiving: <UtensilsCrossed className="w-8 h-8" />,
   blackfriday: <ShoppingBag className="w-8 h-8" />,
   christmas: <TreePine className="w-8 h-8" />,
   christmasmarket: <Store className="w-8 h-8" />,
@@ -31,6 +32,7 @@ const CARD_GRADIENTS: Record<string, string> = {
   friendship: 'from-violet-400 to-fuchsia-500',
   halloween: 'from-orange-500 to-purple-700',
   friendsgiving: 'from-orange-500 to-amber-700',
+  thanksgiving: 'from-amber-600 to-red-900',
   blackfriday: 'from-amber-400 to-gray-900',
   christmas: 'from-red-600 to-amber-500',
   christmasmarket: 'from-green-600 to-red-600',
@@ -48,6 +50,7 @@ const CARD_BG_LIGHT: Record<string, string> = {
   friendship: 'bg-fuchsia-50',
   halloween: 'bg-orange-50',
   friendsgiving: 'bg-orange-50',
+  thanksgiving: 'bg-amber-50',
   blackfriday: 'bg-amber-50',
   christmas: 'bg-red-50',
   christmasmarket: 'bg-green-50',
