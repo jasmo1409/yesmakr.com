@@ -32,6 +32,7 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
   const [celebrated, setCelebrated] = useState(false);
   const [emojiRain, setEmojiRain] = useState<Array<{ id: number; emoji: string; left: number; delay: number; duration: number; size: number }>>([]);
   const [showEntrance, setShowEntrance] = useState(true);
+  const [shareLabel, setShareLabel] = useState<'idle' | 'copied'>('idle');
   const containerRef = useRef<HTMLDivElement>(null);
   const noButtonRef = useRef<HTMLButtonElement>(null);
   const yesButtonRef = useRef<HTMLButtonElement>(null);
@@ -54,6 +55,29 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
     const timer = setTimeout(() => setShowEntrance(false), 800);
     return () => clearTimeout(timer);
   }, []);
+
+  // Share the current question with friends (native share sheet, clipboard fallback)
+  const handleShare = useCallback(async () => {
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+    const shareData = { title: 'yesmakr', text: question, url };
+    try {
+      if (typeof navigator !== 'undefined' && navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+    } catch {
+      // user cancelled or share failed — fall through to clipboard
+    }
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+        setShareLabel('copied');
+        setTimeout(() => setShareLabel('idle'), 2000);
+      }
+    } catch {
+      // ignore
+    }
+  }, [question]);
 
   const getRandomPosition = useCallback(() => {
     // Fixed-viewport coordinates for the top-left corner of the No button.
@@ -324,38 +348,54 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
               That was the right choice! 😊
             </motion.p>
 
-            {/* Call to action — let the viewer make their own or browse templates */}
+            {/* Call to action — share with friends, or make your own / browse templates */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, type: 'spring', bounce: 0.4 }}
-              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
+              className="mt-8 flex flex-col items-center justify-center gap-3"
             >
-              <motion.a
-                href="/create"
+              <motion.button
+                type="button"
+                onClick={handleShare}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-block px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
+                className="inline-block w-full sm:w-auto px-10 py-4 rounded-2xl font-bold text-lg shadow-xl"
                 style={{
                   backgroundColor: palette?.primary ?? '#e11d48',
                   color: palette?.primaryForeground ?? '#fff',
                 }}
               >
-                Create your own {displayEmoji}
-              </motion.a>
-              <motion.a
-                href="/"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block px-8 py-4 rounded-2xl font-bold text-lg border-2"
-                style={{
-                  borderColor: palette?.primary ?? '#e11d48',
-                  color: palette?.text ?? '#333',
-                  backgroundColor: 'transparent',
-                }}
-              >
-                Browse templates
-              </motion.a>
+                {shareLabel === 'copied' ? 'Link copied! ✅' : 'Share with friends 📤'}
+              </motion.button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <motion.a
+                  href="/create"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block px-8 py-4 rounded-2xl font-bold text-lg border-2"
+                  style={{
+                    borderColor: palette?.primary ?? '#e11d48',
+                    color: palette?.text ?? '#333',
+                    backgroundColor: 'transparent',
+                  }}
+                >
+                  Create your own {displayEmoji}
+                </motion.a>
+                <motion.a
+                  href="/"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block px-8 py-4 rounded-2xl font-bold text-lg border-2"
+                  style={{
+                    borderColor: palette?.primary ?? '#e11d48',
+                    color: palette?.text ?? '#333',
+                    backgroundColor: 'transparent',
+                  }}
+                >
+                  Browse templates
+                </motion.a>
+              </div>
             </motion.div>
           </motion.div>
         )}
