@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2, Ghost } from 'lucide-react';
+import { ArrowRight, Heart, Dumbbell, Pizza, Film, PawPrint, Sparkles, Zap, Wand2, Ghost, Drumstick, ShoppingBag, TreePine, Store, Gift, Sun, Swords } from 'lucide-react';
 import Link from 'next/link';
 import type { TemplateConfig } from '@/lib/templates';
 
@@ -13,6 +13,13 @@ const TEMPLATE_ICONS: Record<string, React.ReactNode> = {
   movie: <Film className="w-8 h-8" />,
   friendship: <PawPrint className="w-8 h-8" />,
   halloween: <Ghost className="w-8 h-8" />,
+  friendsgiving: <Drumstick className="w-8 h-8" />,
+  blackfriday: <ShoppingBag className="w-8 h-8" />,
+  christmas: <TreePine className="w-8 h-8" />,
+  christmasmarket: <Store className="w-8 h-8" />,
+  secretsanta: <Gift className="w-8 h-8" />,
+  dune: <Sun className="w-8 h-8" />,
+  doomsday: <Swords className="w-8 h-8" />,
   custom: <Wand2 className="w-8 h-8" />,
 };
 
@@ -23,6 +30,13 @@ const CARD_GRADIENTS: Record<string, string> = {
   movie: 'from-purple-500 to-indigo-600',
   friendship: 'from-violet-400 to-fuchsia-500',
   halloween: 'from-orange-500 to-purple-700',
+  friendsgiving: 'from-orange-500 to-amber-700',
+  blackfriday: 'from-amber-400 to-gray-900',
+  christmas: 'from-red-600 to-amber-500',
+  christmasmarket: 'from-green-600 to-red-600',
+  secretsanta: 'from-indigo-900 to-slate-400',
+  dune: 'from-amber-500 to-orange-700',
+  doomsday: 'from-green-500 to-gray-900',
   custom: 'from-slate-500 to-indigo-600',
 };
 
@@ -33,6 +47,13 @@ const CARD_BG_LIGHT: Record<string, string> = {
   movie: 'bg-purple-50',
   friendship: 'bg-fuchsia-50',
   halloween: 'bg-orange-50',
+  friendsgiving: 'bg-orange-50',
+  blackfriday: 'bg-amber-50',
+  christmas: 'bg-red-50',
+  christmasmarket: 'bg-green-50',
+  secretsanta: 'bg-indigo-50',
+  dune: 'bg-amber-50',
+  doomsday: 'bg-green-50',
   custom: 'bg-slate-50',
 };
 

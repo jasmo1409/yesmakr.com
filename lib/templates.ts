@@ -1,4 +1,4 @@
-export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'halloween' | 'custom';
+export type TemplateId = 'love' | 'gym' | 'food' | 'movie' | 'friendship' | 'halloween' | 'friendsgiving' | 'blackfriday' | 'christmas' | 'christmasmarket' | 'secretsanta' | 'dune' | 'doomsday' | 'custom';
 
 export interface PaletteOption {
   id: string;
@@ -35,6 +35,12 @@ export const FONT_OPTIONS = [
   { id: 'dancing', name: 'Dancing Script', family: "'Dancing Script', cursive", url: 'Dancing+Script:wght@400;500;600;700' },
   { id: 'nunito', name: 'Nunito', family: "'Nunito', sans-serif", url: 'Nunito:wght@400;500;600;700;800' },
   { id: 'creepster', name: 'Creepster', family: "'Creepster', system-ui, cursive", url: 'Creepster' },
+  { id: 'fredoka', name: 'Fredoka', family: "'Fredoka', system-ui, sans-serif", url: 'Fredoka:wght@400;500;600;700' },
+  { id: 'anton', name: 'Anton', family: "'Anton', system-ui, sans-serif", url: 'Anton' },
+  { id: 'greatvibes', name: 'Great Vibes', family: "'Great Vibes', cursive", url: 'Great+Vibes' },
+  { id: 'baloo', name: 'Baloo 2', family: "'Baloo 2', system-ui, cursive", url: 'Baloo+2:wght@400;500;600;700;800' },
+  { id: 'orbitron', name: 'Orbitron', family: "'Orbitron', system-ui, sans-serif", url: 'Orbitron:wght@400;500;600;700;800;900' },
+  { id: 'bungee', name: 'Bungee', family: "'Bungee', system-ui, cursive", url: 'Bungee' },
 ] as const;
 
 // Emoji choices for the "Build Your Own" (custom) template
@@ -134,6 +140,104 @@ export const TEMPLATES: Record<TemplateId, TemplateConfig> = {
       { id: 'haunted', name: 'Haunted Night', bg: '#0E0618', bgGradientFrom: '#1E0B33', bgGradientTo: '#0E0618', primary: '#FB923C', primaryForeground: '#0E0618', secondary: '#3B0764', secondaryForeground: '#E9D5FF', text: '#F5F3FF', muted: '#7C3AED', accent: '#A855F7', font: 'creepster' },
       { id: 'witch', name: "Witch's Brew", bg: '#04140A', bgGradientFrom: '#0A2A16', bgGradientTo: '#04140A', primary: '#84CC16', primaryForeground: '#04140A', secondary: '#1A2E05', secondaryForeground: '#D9F99D', text: '#ECFCCB', muted: '#4D7C0F', accent: '#A3E635', font: 'creepster' },
       { id: 'ghost', name: 'Friendly Ghost', bg: '#FBF7FF', bgGradientFrom: '#F3EEFF', bgGradientTo: '#FFF7ED', primary: '#EA580C', primaryForeground: '#FFFFFF', secondary: '#EDE9FE', secondaryForeground: '#6D28D9', text: '#2E1065', muted: '#C4B5FD', accent: '#F97316', font: 'nunito' },
+    ],
+  },
+  friendsgiving: {
+    id: 'friendsgiving',
+    emoji: '🦃',
+    label: 'Friendsgiving',
+    defaultQuestion: 'Will you come to Friendsgiving? 🦃',
+    celebrationEmojis: ['🦃', '🍂', '🍁', '🌽', '🥧', '🍗', '🧡', '🍽️', '🤎', '🕯️'],
+    celebrationMessage: 'Friendsgiving it is! 🦃🍂',
+    defaultPalette: 'harvest',
+    palettes: [
+      { id: 'harvest', name: 'Harvest', bg: '#1C1206', bgGradientFrom: '#2E1C0A', bgGradientTo: '#1C1206', primary: '#EA580C', primaryForeground: '#FFF7ED', secondary: '#4A2C10', secondaryForeground: '#FDBA74', text: '#FFF1DE', muted: '#B45309', accent: '#F59E0B', font: 'fredoka' },
+      { id: 'cream-harvest', name: 'Cream', bg: '#FFF8EE', bgGradientFrom: '#FFEFD8', bgGradientTo: '#FFF8EE', primary: '#C2410C', primaryForeground: '#FFFFFF', secondary: '#FDE4C8', secondaryForeground: '#7C2D12', text: '#4A2410', muted: '#D98B4A', accent: '#EA580C', font: 'fredoka' },
+      { id: 'maple', name: 'Maple', bg: '#1A0F08', bgGradientFrom: '#3A1D0C', bgGradientTo: '#1A0F08', primary: '#D97706', primaryForeground: '#1A0F08', secondary: '#5B2C0E', secondaryForeground: '#FCD9A8', text: '#FBE8D0', muted: '#92400E', accent: '#F59E0B', font: 'fredoka' },
+    ],
+  },
+  blackfriday: {
+    id: 'blackfriday',
+    emoji: '🛍️',
+    label: 'Black Friday',
+    defaultQuestion: 'Shall we go shopping together? 🛍️',
+    celebrationEmojis: ['🛍️', '🏷️', '💰', '✨', '🛒', '💳', '🤑', '🎁', '⭐', '💛'],
+    celebrationMessage: "Let's SHOP! 🛍️💰",
+    defaultPalette: 'blackgold',
+    palettes: [
+      { id: 'blackgold', name: 'Black & Gold', bg: '#0A0A0A', bgGradientFrom: '#1A1708', bgGradientTo: '#0A0A0A', primary: '#FACC15', primaryForeground: '#0A0A0A', secondary: '#3A2E05', secondaryForeground: '#FDE68A', text: '#FEF9C3', muted: '#A16207', accent: '#EAB308', font: 'anton' },
+      { id: 'noir', name: 'Noir', bg: '#000000', bgGradientFrom: '#171717', bgGradientTo: '#000000', primary: '#D4AF37', primaryForeground: '#000000', secondary: '#2A2A2A', secondaryForeground: '#E8C86A', text: '#F5E9C0', muted: '#8A6D1F', accent: '#D4AF37', font: 'anton' },
+      { id: 'platinum', name: 'Platinum', bg: '#FAFAF7', bgGradientFrom: '#F0EEE6', bgGradientTo: '#FAFAF7', primary: '#111111', primaryForeground: '#FACC15', secondary: '#E8E4D5', secondaryForeground: '#1A1A1A', text: '#171717', muted: '#A08A3C', accent: '#CA8A04', font: 'anton' },
+    ],
+  },
+  christmas: {
+    id: 'christmas',
+    emoji: '🎄',
+    label: 'Christmas',
+    defaultQuestion: 'Will you spend Christmas Eve with me? 🎄',
+    celebrationEmojis: ['🎄', '🎅', '🎁', '⭐', '❄️', '🕯️', '🦌', '🔔', '✨', '❤️'],
+    celebrationMessage: 'Merry Christmas Eve! 🎄✨',
+    defaultPalette: 'candlelight',
+    palettes: [
+      { id: 'candlelight', name: 'Candlelight', bg: '#1A0505', bgGradientFrom: '#3A0C0C', bgGradientTo: '#1A0505', primary: '#E0B64A', primaryForeground: '#1A0505', secondary: '#5B0E0E', secondaryForeground: '#F3D79A', text: '#FBE9D2', muted: '#B91C1C', accent: '#DC2626', font: 'greatvibes' },
+      { id: 'royal-red', name: 'Royal Red', bg: '#200707', bgGradientFrom: '#4A0F0F', bgGradientTo: '#200707', primary: '#F5C542', primaryForeground: '#200707', secondary: '#7F1515', secondaryForeground: '#FBE3A8', text: '#FDECD6', muted: '#A61B1B', accent: '#EF4444', font: 'greatvibes' },
+      { id: 'snowy', name: 'Snowy', bg: '#FFF7F3', bgGradientFrom: '#FBE9E4', bgGradientTo: '#FFF7F3', primary: '#B91C1C', primaryForeground: '#FFFFFF', secondary: '#F5D98E', secondaryForeground: '#7C2D12', text: '#4A0A0A', muted: '#C99A3C', accent: '#D4AF37', font: 'greatvibes' },
+    ],
+  },
+  christmasmarket: {
+    id: 'christmasmarket',
+    emoji: '🎁',
+    label: 'Christmas Market',
+    defaultQuestion: 'Will you go to the Christmas market with me? 🎁',
+    celebrationEmojis: ['🎁', '🎄', '🏮', '🌟', '🍷', '🧣', '🎶', '🕯️', '❄️', '🍪'],
+    celebrationMessage: 'To the market! 🎁🎄',
+    defaultPalette: 'marketglow',
+    palettes: [
+      { id: 'marketglow', name: 'Market Glow', bg: '#0A1A0E', bgGradientFrom: '#123018', bgGradientTo: '#0A1A0E', primary: '#DC2626', primaryForeground: '#FFFFFF', secondary: '#14532D', secondaryForeground: '#FCA5A5', text: '#F0F7E8', muted: '#D97706', accent: '#F59E0B', font: 'playfair' },
+      { id: 'pinewood', name: 'Pinewood', bg: '#17100A', bgGradientFrom: '#2E2012', bgGradientTo: '#17100A', primary: '#E02424', primaryForeground: '#FFFFFF', secondary: '#1E4D2B', secondaryForeground: '#BBF7D0', text: '#F5ECD8', muted: '#CA8A04', accent: '#16A34A', font: 'playfair' },
+      { id: 'frostmarket', name: 'Frost Market', bg: '#F3FAF3', bgGradientFrom: '#E0F2E0', bgGradientTo: '#FFF5F3', primary: '#B91C1C', primaryForeground: '#FFFFFF', secondary: '#BBF7D0', secondaryForeground: '#14532D', text: '#14361D', muted: '#16A34A', accent: '#DC2626', font: 'playfair' },
+    ],
+  },
+  secretsanta: {
+    id: 'secretsanta',
+    emoji: '🎁',
+    label: 'Secret Santa',
+    defaultQuestion: 'Will you join our Secret Santa? 🎁',
+    celebrationEmojis: ['🎁', '🤫', '⭐', '❄️', '🎀', '✨', '🔔', '💙', '🥳', '🎅'],
+    celebrationMessage: 'Ho ho ho! 🤫🎁',
+    defaultPalette: 'midnightgift',
+    palettes: [
+      { id: 'midnightgift', name: 'Midnight Gift', bg: '#070B1A', bgGradientFrom: '#0E1733', bgGradientTo: '#070B1A', primary: '#C0C7D1', primaryForeground: '#070B1A', secondary: '#1E2A4A', secondaryForeground: '#CBD5E1', text: '#E8EEF8', muted: '#64748B', accent: '#93C5FD', font: 'baloo' },
+      { id: 'frostblue', name: 'Frost Blue', bg: '#081229', bgGradientFrom: '#12244D', bgGradientTo: '#081229', primary: '#D8DEE9', primaryForeground: '#081229', secondary: '#243B6B', secondaryForeground: '#BFD4F5', text: '#EAF1FB', muted: '#5B7CB5', accent: '#60A5FA', font: 'baloo' },
+      { id: 'silverlight', name: 'Silver Light', bg: '#F5F8FD', bgGradientFrom: '#E6EEF9', bgGradientTo: '#F5F8FD', primary: '#1E3A8A', primaryForeground: '#FFFFFF', secondary: '#CBD5E1', secondaryForeground: '#1E293B', text: '#0F1F45', muted: '#64748B', accent: '#3B82F6', font: 'baloo' },
+    ],
+  },
+  dune: {
+    id: 'dune',
+    emoji: '🏜️',
+    label: 'Dune',
+    defaultQuestion: 'Will you see Dune: Part Three with me? 🏜️',
+    celebrationEmojis: ['🏜️', '🪐', '⚔️', '🌅', '🐛', '✨', '🔥', '🏖️', '☀️', '🌌'],
+    celebrationMessage: 'See you on Arrakis! 🏜️🪐',
+    defaultPalette: 'desert',
+    palettes: [
+      { id: 'desert', name: 'Desert', bg: '#1A1209', bgGradientFrom: '#2E2012', bgGradientTo: '#1A1209', primary: '#C2410C', primaryForeground: '#FFF7ED', secondary: '#44341C', secondaryForeground: '#E7C9A0', text: '#F2E3C8', muted: '#B45309', accent: '#EA580C', font: 'orbitron' },
+      { id: 'spice', name: 'Spice', bg: '#120C06', bgGradientFrom: '#2A1A0A', bgGradientTo: '#120C06', primary: '#EA580C', primaryForeground: '#120C06', secondary: '#3D2910', secondaryForeground: '#F5C78A', text: '#F6E6CB', muted: '#9A3412', accent: '#F59E0B', font: 'orbitron' },
+      { id: 'dunesand', name: 'Dune Sand', bg: '#FBF3E2', bgGradientFrom: '#F3E4C6', bgGradientTo: '#FBF3E2', primary: '#9A3412', primaryForeground: '#FFFFFF', secondary: '#E8D3A8', secondaryForeground: '#5B3410', text: '#3D2A12', muted: '#C2410C', accent: '#EA580C', font: 'orbitron' },
+    ],
+  },
+  doomsday: {
+    id: 'doomsday',
+    emoji: '💥',
+    label: 'Doomsday',
+    defaultQuestion: 'Will you see Avengers: Doomsday with me? 💥',
+    celebrationEmojis: ['💥', '🦸', '⚡', '🛡️', '🔥', '💢', '🌟', '🤖', '⚙️', '🟢'],
+    celebrationMessage: 'Assemble! 💥⚡',
+    defaultPalette: 'doomsday',
+    palettes: [
+      { id: 'doomsday', name: 'Doomsday', bg: '#0A0E0A', bgGradientFrom: '#111A12', bgGradientTo: '#0A0E0A', primary: '#22C55E', primaryForeground: '#0A0E0A', secondary: '#1C2A20', secondaryForeground: '#86EFAC', text: '#E6F2E6', muted: '#4D7C4F', accent: '#4ADE80', font: 'bungee' },
+      { id: 'steelstorm', name: 'Steel Storm', bg: '#0B0D10', bgGradientFrom: '#171B20', bgGradientTo: '#0B0D10', primary: '#9CA3AF', primaryForeground: '#0B0D10', secondary: '#1F2937', secondaryForeground: '#D1D5DB', text: '#ECEFF3', muted: '#4B5563', accent: '#34D399', font: 'bungee' },
+      { id: 'toxicwar', name: 'Toxic War', bg: '#070A07', bgGradientFrom: '#0E160E', bgGradientTo: '#070A07', primary: '#16A34A', primaryForeground: '#FFFFFF', secondary: '#14281A', secondaryForeground: '#A7F3D0', text: '#DFF5E3', muted: '#3F6F47', accent: '#22C55E', font: 'bungee' },
     ],
   },
   custom: {

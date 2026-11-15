@@ -324,22 +324,39 @@ export default function AskClient({ templateId, questionText, paletteId, fontId,
               That was the right choice! 😊
             </motion.p>
 
-            {/* Call to action — let the viewer make their own */}
-            <motion.a
-              href="/create"
+            {/* Call to action — let the viewer make their own or browse templates */}
+            <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, type: 'spring', bounce: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block mt-8 px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
-              style={{
-                backgroundColor: palette?.primary ?? '#e11d48',
-                color: palette?.primaryForeground ?? '#fff',
-              }}
+              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
             >
-              Create your own {displayEmoji}
-            </motion.a>
+              <motion.a
+                href="/create"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block px-8 py-4 rounded-2xl font-bold text-lg shadow-xl"
+                style={{
+                  backgroundColor: palette?.primary ?? '#e11d48',
+                  color: palette?.primaryForeground ?? '#fff',
+                }}
+              >
+                Create your own {displayEmoji}
+              </motion.a>
+              <motion.a
+                href="/"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block px-8 py-4 rounded-2xl font-bold text-lg border-2"
+                style={{
+                  borderColor: palette?.primary ?? '#e11d48',
+                  color: palette?.text ?? '#333',
+                  backgroundColor: 'transparent',
+                }}
+              >
+                Browse templates
+              </motion.a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
